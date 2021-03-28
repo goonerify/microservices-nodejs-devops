@@ -12,7 +12,7 @@ build: # NOTE: Context
   artifacts: # NOTE: Context
     - image: oldledger/ticketing-auth
     # - image: us.gcr.io/ticketing-dev-308807/auth # This is the format that google cloud build uses to name images
-      context: auth
+      context: E:\Projects\Samples\Microservices\ticketing\auth
       docker:
         dockerfile: Dockerfile
       sync:
