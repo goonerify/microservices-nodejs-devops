@@ -1,0 +1,21 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - ./infra/k8s/*
+build: # NOTE: Context
+  local:
+    push: false
+  # googleCloudBuild:
+  #   projectId: ticketing-dev-308807
+  artifacts: # NOTE: Context
+    - image: oldledger/ticketing-auth
+    # - image: us.gcr.io/ticketing-dev-308807/auth # This is the format that google cloud build uses to name images
+      context: auth
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts' # Files to automatically inject into their pod(s) without rebuilding the app
+            dest: . # Indicates where the files should be synced to. In this case, the same place

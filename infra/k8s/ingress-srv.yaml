@@ -1,0 +1,55 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: ticketing
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - ticketing.com
+  # - port: # NOTE: Disable security
+  #     number: 443
+  #     name: https
+  #     protocol: HTTP
+  #   hosts:
+  #   - ticketing.dev
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: ticketing
+spec:
+  hosts:
+  - ticketing.com
+  gateways:
+  - ticketing
+  http:
+  - match:
+    - uri:
+        regex: /api/users/?(.*)
+    route:
+    - destination:
+        host: auth-srv
+        port:
+          number: 3000
+# ---
+# apiVersion: networking.k8s.io/v1beta1
+# kind: Ingress
+# metadata:
+#   name: sample
+#   annotations:
+#     kubernetes.io/ingress.class: istio
+# spec:
+#   rules:
+#   - host: ticketing.dev
+#     http:
+#       paths:
+#       - path: /api/users/currentuser
+#         backend:
+#           serviceName: auth-srv
+#           servicePort: 3000
