@@ -11,11 +11,20 @@ build: # NOTE: Context
   #   projectId: ticketing-dev-308807
   artifacts: # NOTE: Context
     - image: oldledger/ticketing-auth
-    # - image: us.gcr.io/ticketing-dev-308807/auth # This is the format that google cloud build uses to name images
-      context: E:\Projects\Samples\Microservices\ticketing\auth
+      # - image: us.gcr.io/ticketing-dev-308807/auth # This is the format that google cloud build uses to name images
+      context: E:\Projects\Samples\Microservices\ticketing\auth #FIXME: Use environment variable instead of hardcoding this value
       docker:
         dockerfile: Dockerfile
       sync:
         manual:
-          - src: 'src/**/*.ts' # Files to automatically inject into their pod(s) without rebuilding the app
+          - src: "src/**/*.ts" # Files to automatically inject into their pod(s) without rebuilding the app
+            dest: . # Indicates where the files should be synced to. In this case, the same place
+    - image: oldledger/ticketing-client
+      # - image: us.gcr.io/ticketing-dev-308807/client # This is the format that google cloud build uses to name images
+      context: E:\Projects\Samples\Microservices\ticketing\client #FIXME: Use environment variable instead of hardcoding this value
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "**/*.js" # Files to automatically inject into their pod(s) without rebuilding the app
             dest: . # Indicates where the files should be synced to. In this case, the same place

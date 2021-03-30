@@ -25,3 +25,10 @@ Get existing secret
 
 Switch cygdrive directory
 `cd /cygdrive/e/Projects/Samples/Microservices/ticketing/auth/`
+
+TODO: Test if building services without istio is faster
+
+Start skaffold in dev mode with manual trigger
+`skaffold dev --trigger=manual`
+
+TODO: Use skaffold profiles to switch between local and GCP contexts
