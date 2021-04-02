@@ -13,29 +13,32 @@ spec:
         app: auth
     spec:
       containers:
-      - name: auth # NOTE: Context
-        image: oldledger/ticketing-auth
-        # image: us.gcr.io/ticketing-dev-308807/auth
-        env:
-          - name: JWT_KEY # Just a label for logging
-            valueFrom: 
-              secretKeyRef:
-                name: jwt-secret
-                key: JWT_KEY
-        resources:
-          limits:
-            memory: "256Mi"
-            cpu: "250m"
+        - name: auth # NOTE: Context
+          image: oldledger/ticketing-auth
+          # image: us.gcr.io/ticketing-dev-308807/auth
+          env:
+            - name: JWT_KEY # Just a label for logging
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "250m"
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: auth-srv
+  labels:
+    app: auth
+    service: auth-srv
 spec:
   selector:
     app: auth
   ports:
-    - name: auth
+    - name: http
       protocol: TCP
       port: 3000
       targetPort: 3000
