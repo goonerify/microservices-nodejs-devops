@@ -9,7 +9,7 @@ LINUX
 Authenticate Google Cloud API
 https://stackoverflow.com/a/63181221/1445318
 `gcloud auth login`
-`gcloud container clusters get-credentials <cluster name> --zone <zone> --project <project id>`
+`gcloud container clusters get-credentials <cluster name: ticketing-dev> --zone <zone:us-east1-b> --project <project id:ticketing-dev-308807>`
 `gcloud config set project <project id>`
 
 TODO: Test Istio, grafana, prometheus etc in gcloud
@@ -24,11 +24,22 @@ Get existing secret
 `kubectl get secrets`
 
 Switch cygdrive directory
-`cd /cygdrive/e/Projects/Samples/Microservices/ticketing/auth/`
+`cd /cygdrive/e/Projects/Samples/Microservices/ticketing/devops/`
 
 TODO: Test if building services without istio is faster
 
 Start skaffold in dev mode with manual trigger
 `skaffold dev --trigger=manual`
 
-TODO: Use skaffold profiles to switch between local and GCP contexts
+Use skaffold profiles to switch between local and GCP contexts
+`skaffold dev -p gcb`
+
+TODO: Create a kubernetes ExternalName service to simplify the URL to istio gateway in SSR
+
+`kubectl exec -it client-depl-7c98465cc6-cqwq5 -c client /bin/sh`
+
+`curl http://istio-ingressgateway.istio-system.svc.cluster.local/api/users/currentuser`
+
+cURL HTTP request from client pod to auth service
+
+`kubectl exec "$(kubectl get pod -l app=client -o jsonpath='{.items[0].metadata.name}')" -c client -- curl -sS auth-srv:3000/api/users/currentuser | grep -o "<title>.*</title>"`

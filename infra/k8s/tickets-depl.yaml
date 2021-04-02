@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tickets-depl
+spec:
+  replicas: 1 # Google cloud throws warning when set to 1. Set to 3 to avoid those warnings
+  selector:
+    matchLabels:
+      app: tickets
+  template:
+    metadata:
+      labels:
+        app: tickets
+    spec:
+      containers:
+        - name: tickets # NOTE: Context
+          image: oldledger/ticketing-tickets
+          # image: us.gcr.io/ticketing-dev-308807/tickets
+          env:
+            - name: JWT_KEY # Just a label for logging
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "250m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tickets-srv
+  labels:
+    app: tickets
+    service: tickets-srv
+spec:
+  selector:
+    app: tickets
+  ports:
+    - name: http
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
