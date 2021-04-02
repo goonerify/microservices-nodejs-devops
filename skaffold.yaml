@@ -4,6 +4,18 @@ deploy:
   kubectl:
     manifests:
       - ./infra/k8s/*
+profiles:
+  - name: gcb
+    build:
+      googleCloudBuild:
+        projectId: ticketing-dev-308807
+    patches:
+      - op: replace
+        path: /build/artifacts/0/image
+        value: us.gcr.io/ticketing-dev-308807/auth
+      - op: replace
+        path: /build/artifacts/1/image
+        value: us.gcr.io/ticketing-dev-308807/client
 build: # NOTE: Context
   local:
     push: false
