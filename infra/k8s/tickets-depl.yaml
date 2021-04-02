@@ -17,6 +17,8 @@ spec:
           image: oldledger/ticketing-tickets
           # image: us.gcr.io/ticketing-dev-308807/tickets
           env:
+            - name: MONGO_URI
+              value: "mongodb://tickets-mongo-srv:27017/tickets"
             - name: JWT_KEY # Just a label for logging
               valueFrom:
                 secretKeyRef:
