@@ -41,5 +41,8 @@ TODO: Create a kubernetes ExternalName service to simplify the URL to istio gate
 `curl http://istio-ingressgateway.istio-system.svc.cluster.local/api/users/currentuser`
 
 cURL HTTP request from client pod to auth service
-
 `kubectl exec "$(kubectl get pod -l app=client -o jsonpath='{.items[0].metadata.name}')" -c client -- curl -sS auth-srv:3000/api/users/currentuser | grep -o "<title>.*</title>"`
+
+Setup port forwarding on a specific port to a pod running within our cluster
+(This should only be used for troubleshooting in a development environment)
+`kubectl port-forward <name of the pod><port on local machine: port on the pod>`
