@@ -46,3 +46,8 @@ cURL HTTP request from client pod to auth service
 Setup port forwarding on a specific port to a pod running within our cluster
 (This should only be used for troubleshooting in a development environment)
 `kubectl port-forward <name of the pod><port on local machine: port on the pod>`
+
+NATS streaming server monitoring page
+`http://localhost:8222/streaming`
+NATS streaming server subscriptions in channels info page
+`http://localhost:8222/streaming/channelsz?subs=1`
