@@ -36,7 +36,7 @@ Use skaffold profiles to switch between local and GCP contexts
 
 TODO: Create a kubernetes ExternalName service to simplify the URL to istio gateway in SSR
 
-`kubectl exec -it client-depl-7c98465cc6-cqwq5 -c client /bin/sh`
+`kubectl exec -it client-depl-7c98465cc6-cqwq5 -c client -- /bin/sh`
 
 `curl http://istio-ingressgateway.istio-system.svc.cluster.local/api/users/currentuser`
 

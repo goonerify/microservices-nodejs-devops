@@ -11,6 +11,9 @@ spec:
     metadata:
       labels:
         app: nats
+      annotations:
+        # Disable sidecar injection. Doesn't seem to work with NATS streaming server
+        sidecar.istio.io/inject: "false"
     spec:
       containers:
         - name: nats
@@ -31,6 +34,10 @@ spec:
               "-cid",
               "ticketing",
             ]
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "250m"
 ---
 apiVersion: v1
 kind: Service
