@@ -51,3 +51,6 @@ NATS streaming server monitoring page
 `http://localhost:8222/streaming`
 NATS streaming server subscriptions in channels info page
 `http://localhost:8222/streaming/channelsz?subs=1`
+
+Restarting a pod: Delete the pod and let the deployment automatically recreate it
+`kubectl delete pod/<pod name>`
