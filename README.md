@@ -36,8 +36,10 @@ Use skaffold profiles to switch between local and GCP contexts
 
 TODO: Create a kubernetes ExternalName service to simplify the URL to istio gateway in SSR
 
+Run an interactive shell in a pod
 `kubectl exec -it client-depl-7c98465cc6-cqwq5 -c client -- /bin/sh`
 
+Make a cURL request to the ingress gateway from within a pod
 `curl http://istio-ingressgateway.istio-system.svc.cluster.local/api/users/currentuser`
 
 cURL HTTP request from client pod to auth service
@@ -54,3 +56,9 @@ NATS streaming server subscriptions in channels info page
 
 Restarting a pod: Delete the pod and let the deployment automatically recreate it
 `kubectl delete pod/<pod name>`
+
+Disable istio sidecar injection in the default namespace
+`kubectl label namespace default istio-injection-`
+
+Enable istio sidecar injection in the default namespace
+`kubectl label namespace default istio-injection=enabled`
