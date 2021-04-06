@@ -47,6 +47,14 @@ spec:
               number: 3000
     - match:
         - uri:
+            regex: /api/orders/?(.*)
+      route:
+        - destination:
+            host: orders-srv
+            port:
+              number: 3000
+    - match:
+        - uri:
             regex: /?(.*) # Strangely, this path cannot easily be changed. I guess that's part of the magic of nextjs
       route:
         - destination:
