@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tickets-depl
+  name: orders-depl
 spec:
   # replicas: 1 # Google cloud throws warning when set to 1. Set to 3 to avoid those warnings
   selector:
     matchLabels:
-      app: tickets
+      app: orders
   template:
     metadata:
       labels:
-        app: tickets
+        app: orders
     spec:
       containers:
-        - name: tickets # NOTE: Context
-          image: oldledger/ticketing-tickets # TODO: Use skaffold profiles instead of manual switch
-          # image: us.gcr.io/ticketing-dev-308807/tickets
+        - name: orders # NOTE: Context
+          image: oldledger/ticketing-orders # TODO: Use skaffold profiles instead of manual switch
+          # image: us.gcr.io/ticketing-dev-308807/orders
           env:
             # Save the pod's name as an env to use as the client ID
             - name: NATS_CLIENT_ID
@@ -27,7 +27,7 @@ spec:
             - name: NATS_CLUSTER_ID
               value: ticketing
             - name: MONGO_URI
-              value: "mongodb://tickets-mongo-srv:27017/tickets"
+              value: "mongodb://orders-mongo-srv:27017/orders"
             - name: JWT_KEY # Just a label for logging
               valueFrom:
                 secretKeyRef:
@@ -41,13 +41,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: tickets-srv
+  name: orders-srv
   labels:
-    app: tickets
-    service: tickets-srv
+    app: orders
+    service: orders-srv
 spec:
   selector:
-    app: tickets
+    app: orders
   ports:
     - name: http
       protocol: TCP
