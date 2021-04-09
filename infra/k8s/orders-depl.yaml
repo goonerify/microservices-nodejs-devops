@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: orders-depl
 spec:
-  # replicas: 1 # Google cloud throws warning when set to 1. Set to 3 to avoid those warnings
+  replicas: 3 # Google cloud throws warning when set to 1. Set to 3 to avoid those warnings
   selector:
     matchLabels:
       app: orders
