@@ -42,7 +42,7 @@ Run an interactive shell in a pod
 Make a cURL request to the ingress gateway from within a pod
 `curl http://istio-ingressgateway.istio-system.svc.cluster.local/api/users/currentuser`
 
-cURL HTTP request from client pod to auth service
+cURL HTTP request from client pod to auth pod
 `kubectl exec "$(kubectl get pod -l app=client -o jsonpath='{.items[0].metadata.name}')" -c client -- curl -sS auth-srv:3000/api/users/currentuser | grep -o "<title>.*</title>"`
 
 Setup port forwarding on a specific port to a pod running within our cluster
@@ -62,3 +62,9 @@ Disable istio sidecar injection in the default namespace
 
 Enable istio sidecar injection in the default namespace
 `kubectl label namespace default istio-injection=enabled`
+
+Connect to orders and tickets mongo pods
+`kubectl port-forward <orders-mongo-pod-name> 28017:27017`
+`kubectl port-forward <tickets-mongo-pod-name> 29017:27017`
+`mongo --host localhost:28017`
+`mongo --host localhost:29017`
