@@ -80,3 +80,8 @@ Find a mongodb record
 `db.tickets.find({price: 15 })`
 Verify that mongodb collection has record(s)
 `db.tickets.find({price: 15 }).length()`
+
+NUKE DOCKER IMAGES AND CONTAINERS
+`docker container stop $(docker container ls -aq)`
+`docker container rm $(docker container ls -aq) -f`
+`docker image rm $(docker image ls -aq) -f`
