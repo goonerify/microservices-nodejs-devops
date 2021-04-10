@@ -82,6 +82,7 @@ Verify that mongodb collection has record(s)
 `db.tickets.find({price: 15 }).length()`
 
 NUKE DOCKER IMAGES AND CONTAINERS
+(First check that you have pushed the latest image of the erring container to docker hub)
 `docker container stop $(docker container ls -aq)`
 `docker container rm $(docker container ls -aq) -f`
 `docker image rm $(docker image ls -aq) -f`
