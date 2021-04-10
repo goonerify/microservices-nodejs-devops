@@ -68,3 +68,15 @@ Connect to orders and tickets mongo pods
 `kubectl port-forward <tickets-mongo-pod-name> 29017:27017`
 `mongo --host localhost:28017`
 `mongo --host localhost:29017`
+
+Connect to mongodb pod and run commands against the mongo database
+`kubectl exec -it <pod name for mongodb> mongo`
+
+List all dbs in a mongo database
+`show dbs;`
+Switch current mongo database
+`use <db name>`
+Find a mongodb record
+`db.tickets.find({price: 15 })`
+Verify that mongodb collection has record(s)
+`db.tickets.find({price: 15 }).length()`
