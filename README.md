@@ -72,6 +72,8 @@ Connect to orders and tickets mongo pods
 Connect to mongodb pod and run commands against the mongo database
 `kubectl exec -it <pod name for mongodb> mongo`
 
+Useful MongoDB commands
+https://docs.mongodb.com/manual/reference/mongo-shell/#command-helpers
 List all dbs in a mongo database
 `show dbs;`
 Switch current mongo database
@@ -80,6 +82,8 @@ Find a mongodb record
 `db.tickets.find({price: 15 })`
 Verify that mongodb collection has record(s)
 `db.tickets.find({price: 15 }).length()`
+Show collections in the current database
+`show collections`
 
 NUKE DOCKER IMAGES AND CONTAINERS
 (First check that you have pushed the latest image of the erring container to docker hub)
