@@ -18,8 +18,8 @@ profiles:
         path: /build/artifacts/1/image
         value: us.gcr.io/ticketing-dev-308807/client
 build: # NOTE: Context
-  local:
-    push: false
+  # local:
+  #   push: false
   # googleCloudBuild:
   #   projectId: ticketing-dev-308807
   artifacts: # NOTE: Context
