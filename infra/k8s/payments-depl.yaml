@@ -33,6 +33,11 @@ spec:
                 secretKeyRef:
                   name: jwt-secret
                   key: JWT_KEY
+            - name: STRIPE_KEY # Just a label for logging
+              valueFrom:
+                secretKeyRef:
+                  name: stripe-secret
+                  key: STRIPE_KEY
           resources:
             limits:
               memory: "256Mi"

@@ -18,7 +18,7 @@ Mongoose user model vs mongoose user document
 Mongoose user model represents the entire collection of users, while Mongoose user document represents one single user
 
 Create a secret
-`kubectl create secret generic jwt-secret --from-literal=JWT_KEY=asdf`
+`kubectl create secret generic <name of the secret i.e jwt-secret> --from-literal JWT_KEY=asdf`
 
 Get existing secret
 `kubectl get secrets`
