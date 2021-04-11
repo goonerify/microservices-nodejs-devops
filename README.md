@@ -86,3 +86,7 @@ NUKE DOCKER IMAGES AND CONTAINERS
 `docker container stop $(docker container ls -aq)`
 `docker container rm $(docker container ls -aq) -f`
 `docker image rm $(docker image ls -aq) -f`
+
+TODO
+RabbitMQ
+Database polling
