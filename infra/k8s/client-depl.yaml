@@ -15,10 +15,10 @@ spec:
       containers:
         - name: client
           image: oldledger/ticketing-client
-          resources:
-            limits:
-              memory: "512Mi"
-              cpu: "250m"
+          # resources:
+          #   limits:
+          #     memory: "512Mi"
+          #     cpu: "250m"
 ---
 apiVersion: v1
 kind: Service
